@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { FontsType, ThemeType } from "@/types";
+import MainSection from "@/components/MainSection";
+import ThemeProvider from "@/provider/theme";
 
 export default function Home() {
   const [font, setFont] = useState<FontsType>("serif");
   const [theme, setTheme] = useState<ThemeType>("light");
+
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
   };
-  console.log(theme);
 
   useEffect(() => {
     document.querySelector("html")!.setAttribute("data-theme", theme);
@@ -21,13 +24,11 @@ export default function Home() {
   };
 
   return (
-    <div className={`max-w-2xl mx-auto ${fontConfig[font]}`}>
-      <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
-        font={font}
-        setFont={setFont}
-      />
-    </div>
+    <ThemeProvider value={theme}>
+      <div className={`max-w-2xl mx-auto overflow-hidden ${fontConfig[font]}`}>
+        <Navbar toggleTheme={toggleTheme} font={font} setFont={setFont} />
+        <MainSection />
+      </div>
+    </ThemeProvider>
   );
 }

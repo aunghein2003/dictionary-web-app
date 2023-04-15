@@ -1,15 +1,18 @@
-import { FontsType, ThemeType } from "@/types";
+import { ThemeContext } from "@/provider/theme";
+import { FontsType } from "@/types";
+import { useContext } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { RiBook2Line } from "react-icons/ri";
 
 interface Props {
-  theme: ThemeType;
   toggleTheme: () => void;
   font: FontsType;
-  setFont: React.Dispatch<React.SetStateAction<"serif" | "sans" | "mono">>;
+  setFont: React.Dispatch<React.SetStateAction<FontsType>>;
 }
 
-function Navbar({ theme, toggleTheme, font, setFont }: Props) {
+function Navbar({ toggleTheme, font, setFont }: Props) {
+  const theme = useContext(ThemeContext);
+
   return (
     <div className="flex justify-between items-center p-2 px-4">
       <div className={`text-4xl`}>
