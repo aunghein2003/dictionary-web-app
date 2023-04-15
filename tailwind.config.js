@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -13,6 +14,15 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+  },
+  daisyui: {
+    styled: true,
+    themes: ["light", "dark"],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
   },
   plugins: [require("daisyui")],
 };
