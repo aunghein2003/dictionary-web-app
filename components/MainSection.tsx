@@ -1,11 +1,14 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import MeaningCard from "./MeaningCard";
-import { ResponseData, ResponseError } from "@/types";
 import DisplayWord from "./DisplayWord";
+import { ResponseData, ResponseError } from "@/types";
+import { LineWave } from "react-loader-spinner";
+import { ThemeContext } from "@/provider/theme";
 
 function Main() {
   const inputRef = useRef<HTMLInputElement>(null);
   const URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+  const theme = useContext(ThemeContext);
   const [data, setData] = useState<ResponseData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ResponseError | null>(null);
@@ -50,8 +53,12 @@ function Main() {
       </form>
 
       {loading && (
-        <div className="py-7">
-          <h1 className="text-3xl font-bold">Loading...</h1>
+        <div className=" py-20 flex justify-center">
+          <LineWave
+            height={150}
+            width={150}
+            color={theme === "light" ? "#000" : "#fff"}
+          />
         </div>
       )}
 
