@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MeaningCard from "./MeaningCard";
 import DisplayWord from "./DisplayWord";
 import { ResponseData, ResponseError } from "@/types";
@@ -6,23 +6,16 @@ import { LineWave } from "react-loader-spinner";
 import { ThemeContext } from "@/provider/theme";
 
 function Main() {
-  const inputRef = useRef<HTMLInputElement>(null);
   const URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
   const theme = useContext(ThemeContext);
   const [data, setData] = useState<ResponseData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ResponseError | null>(null);
 
-  async function submitHandler(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const keyword = e.target.value;
 
-    const keyword = inputRef.current?.value;
-    //Check if keyword is empty
-    if (!keyword) {
-      return alert("Input cannot be empty!");
-    }
-
-    //Reset State
+    // //Reset State
     setLoading(true);
     setData(null);
     setError(null);
@@ -41,13 +34,24 @@ function Main() {
     return res.json();
   }
 
+  useEffect(() => {
+    if (data) {
+      setError(null);
+    }
+
+    if (loading) {
+      setData(null);
+      setError(null);
+    }
+  }, [data, error, loading]);
+
   return (
     <div className="p-2 px-4">
-      <form onSubmit={submitHandler} className="px-4 py-5">
+      <form className="px-4 py-5">
         <input
-          ref={inputRef}
+          onChange={handleChange}
           type="text"
-          placeholder="Type here"
+          placeholder="Search a word..."
           className="input input-bordered w-full font-normal text-lg text-slate-700 bg-gray-100 "
         />
       </form>

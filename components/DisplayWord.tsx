@@ -14,7 +14,7 @@ function DisplayWord({ word, phonetic, phonetics }: Props) {
   const phoneticWord = phonetic
     ? phonetic
     : phonetics.find((p) => typeof p.text !== "undefined" && p.text.length > 0)!
-        .text; //Finding a phonetic word in an array of object
+        ?.text; //Finding a phonetic word in an array of object
   const audio = phonetics.find(
     (p) => typeof p.audio !== "undefined" && p.audio.length > 0
   )?.audio; //Finding an audio mp3 in an array of object
