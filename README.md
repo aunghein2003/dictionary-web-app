@@ -1,7 +1,14 @@
 # Dictionary web app
 
-This is dictionary app challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL). I use next js, styling for tailwindcss, [Dictionary API](https://dictionaryapi.dev/) and [daisyui](aisyui.com)
+This is dictionary app challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL).
 This is [Live Demo](https://dictionary-web-app-nu.vercel.app/). I hope the link works fine
+
+### Tech Stacks Using
+- Next.js
+- Typescript
+- TailwindCss
+- daisyui
+- dictionary api
 
 # Screenshots
 
